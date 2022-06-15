@@ -1,0 +1,14 @@
+schema {
+    query: Query
+}
+
+type Query {
+    join: AccountAndTokenDto
+}
+
+type Account {
+    email: String!,
+    password: String!,
+    nickname: String
+}
+
