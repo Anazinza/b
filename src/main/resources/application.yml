@@ -4,6 +4,15 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/spot?serverTimezone=UTC&characterEncoding=UTF-8
-    username: root
-    password: lje0818OVO!
+    url: ${DB_URL:}
+    username: ${DB_USERNAME:}
+    password: ${DB_PW:}
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+  graphql:
+    path: /spotemo
+    graphiql:
+      enabled: true
