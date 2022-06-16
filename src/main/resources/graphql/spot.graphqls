@@ -1,0 +1,35 @@
+schema {
+    query: Query
+}
+
+type Query {
+    getPost(id: Int!): PostResponseDto
+    getPostTest(id: Int!): Post
+
+}
+
+type Account {
+    email: String!,
+    password: String!,
+    nickname: String
+}
+
+type Post {
+    id: Int!,
+    title: String!,
+    content: String!,
+    emotion: Emotion,
+    createdAt: String
+}
+
+type PostResponseDto {
+    id: Int!,
+    title: String!,
+    content: String!,
+    emotion: Emotion,
+    createdAt: String
+}
+
+type Emotion {
+    emotion: String
+}
