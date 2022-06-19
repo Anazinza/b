@@ -4,6 +4,7 @@ import com.dsm.spotemo.dto.request.AccountRequestDto;
 import com.dsm.spotemo.dto.response.TokenAndAccountDto;
 import com.dsm.spotemo.entity.Account;
 import com.dsm.spotemo.entity.value.Nickname;
+import com.dsm.spotemo.global.TokenUtil;
 import com.dsm.spotemo.repository.AccountRepository;
 import graphql.kickstart.tools.GraphQLMutationResolver;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,7 @@ import java.util.Random;
 public class AccountMutation implements GraphQLMutationResolver {
     private final AccountRepository accountRepository;
     private final PasswordEncoder passwordEncoder;
+    private final TokenUtil tokenUtil;
 
     public TokenAndAccountDto createAccount(final AccountRequestDto dto) {
         final int idx = new Random().nextInt(Nickname.values().length);
@@ -41,8 +43,6 @@ public class AccountMutation implements GraphQLMutationResolver {
         return TokenAndAccountDto.builder()
                 .email(dto.getEmail())
                 .nickname(nickname)
-                .token("").build();
+                .token(tokenUtil.createToken(dto.getEmail(), nickname)).build();
     }
-
-    // 토큰 생성
 }
