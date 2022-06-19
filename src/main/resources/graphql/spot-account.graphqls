@@ -1,11 +1,14 @@
-schema {
-    query: Query
+
+
+input AccountRequestDto {
+    email: String!,
+    password: String!
 }
 
-type Query {
-    getPost(id: Int!): PostResponseDto
-    getPostTest(id: Int!): Post
-
+type TokenAndAccountDto {
+    email: String,
+    nickname: String,
+    token: String!
 }
 
 type Account {
