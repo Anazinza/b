@@ -7,6 +7,7 @@ plugins {
 group = 'com.dsm'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
+//ext['kotlin.version'] = '1.3.10'
 
 configurations {
 	compileOnly {
@@ -20,7 +21,6 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-graphql'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
@@ -31,8 +31,17 @@ dependencies {
 	testImplementation 'org.springframework.graphql:spring-graphql-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 
-	implementation group: 'com.graphql-java-kickstart', name: 'graphql-java-tools', version: '11.0.0'
+
+	implementation 'com.graphql-java-kickstart:graphql-spring-boot-starter:12.0.0'
+
+	testImplementation 'com.graphql-java-kickstart:graphql-spring-boot-starter-test:12.0.0'
+
+//	implementation group: 'com.graphql-java-kickstart', name: 'graphql-java-tools', version: '11.0.0'
 	implementation 'io.leangen.graphql:spqr:0.10.1'
+//	implementation 'org.springframework.boot:spring-boot-starter-graphql'
+//	implementation 'com.graphql-java:graphql-java:11.0'
+//	implementation 'com.graphql-java-kickstart:graphql-spring-boot-starter:11.0.0'
+//	implementation 'com.graphql-java-kickstart:playground-spring-boot-starter:11.0.0'
 }
 
 tasks.named('test') {
