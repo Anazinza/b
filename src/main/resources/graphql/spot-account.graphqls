@@ -11,7 +11,8 @@ type Query {
 type Account {
     email: String!,
     password: String!,
-    nickname: String
+    nickname: String,
+    isLive: Boolean
 }
 
 type Post {
@@ -19,7 +20,9 @@ type Post {
     title: String!,
     content: String!,
     emotion: Emotion,
-    createdAt: String
+    createdAt: String,
+    account: Account,
+    isLive: Boolean
 }
 
 type PostResponseDto {
@@ -27,9 +30,22 @@ type PostResponseDto {
     title: String!,
     content: String!,
     emotion: Emotion,
-    createdAt: String
+    date: String,
 }
 
 type Emotion {
     emotion: String
+}
+
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+type Query {
+    getPost(id: Int!): PostResponseDto
+}
+
+type Mutation {
+    createAccount(dto: AccountRequestDto!): TokenAndAccountDto
 }
