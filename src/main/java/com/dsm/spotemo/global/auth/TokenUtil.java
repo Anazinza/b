@@ -1,9 +1,12 @@
-package com.dsm.spotemo.global;
+package com.dsm.spotemo.global.auth;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
@@ -12,9 +15,12 @@ import java.util.Date;
 
 @Log4j2
 @Component
+@RequiredArgsConstructor
 public class TokenUtil {
     @Value("${auth.secret}")
     private String secret;
+
+    private final AccountDetailsService accountDetailsService;
 
     public String createToken(String email, String nickname) {
         Key key = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
@@ -26,6 +32,11 @@ public class TokenUtil {
                 .setExpiration(new Date(System.currentTimeMillis()+90000*60*24*12))
                 .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
+    }
+
+    public Authentication getAuthentication(String token) {
+        AccountDetails accountDetails = accountDetailsService.loadUserByUsername(getEmail(token));
+        return new UsernamePasswordAuthenticationToken(accountDetails, "", accountDetails.getAuthorities());
     }
 
     public String getNickname(String token) {
