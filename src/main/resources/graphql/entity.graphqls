@@ -10,7 +10,7 @@ type Post {
     title: String!,
     content: String!,
     emotion: Emotion,
-    createdAt: String,
+    date: String,
     account: Account,
     isLive: Boolean
 }

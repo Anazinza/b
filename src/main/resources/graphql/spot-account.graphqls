@@ -9,4 +9,5 @@ type Query {
 
 type Mutation {
     createAccount(req: AccountRequest!): TokenAndAccountResponse
+    createPost(req: PostCreateRequest, isLive: Int!): Boolean
 }

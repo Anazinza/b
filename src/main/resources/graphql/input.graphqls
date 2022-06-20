@@ -2,3 +2,9 @@ input AccountRequest {
     email: String!,
     password: String!
 }
+
+input PostCreateRequest {
+    title: String,
+    content: String!,
+    emotion: String
+}
