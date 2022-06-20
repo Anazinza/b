@@ -1,13 +1,16 @@
 package com.dsm.spotemo.entity;
 
 import com.dsm.spotemo.entity.value.Emotion;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.util.Date;
 
+@AllArgsConstructor
+@Builder
 @Getter
 @NoArgsConstructor
 @Entity
@@ -20,7 +23,7 @@ public class Post {
     private String content;
     @Embedded
     private Emotion emotion;
-    private Date createdAt;
+    private Date date;
     private int isLive=1;
 
     @ManyToOne(fetch = FetchType.LAZY)
