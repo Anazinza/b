@@ -1,54 +1,12 @@
-
-
-input AccountRequestDto {
-    email: String!,
-    password: String!
-}
-
-type TokenAndAccountDto {
-    email: String,
-    nickname: String,
-    token: String!
-}
-
-type Account {
-    email: String!,
-    password: String!,
-    nickname: String,
-    isLive: Boolean
-}
-
-type Post {
-    id: Int!,
-    title: String!,
-    content: String!,
-    emotion: Emotion,
-    createdAt: String,
-    account: Account,
-    isLive: Boolean
-}
-
-type PostResponseDto {
-    id: Int!,
-    title: String!,
-    content: String!,
-    emotion: Emotion,
-    date: String,
-}
-
-type Emotion {
-    emotion: String
-}
-
 schema {
     query: Query
     mutation: Mutation
 }
 
 type Query {
-    getPost(id: Int!): PostResponseDto
+    getPost(id: Int!): PostResponse
 }
 
 type Mutation {
-    createAccount(dto: AccountRequestDto!): TokenAndAccountDto
+    createAccount(req: AccountRequest!): TokenAndAccountResponse
 }

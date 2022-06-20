@@ -1,0 +1,13 @@
+type TokenAndAccountResponse {
+    email: String,
+    nickname: String,
+    token: String!
+}
+
+type PostResponse {
+    id: Int!,
+    title: String!,
+    content: String!,
+    emotion: Emotion,
+    date: String,
+}

@@ -1,0 +1,20 @@
+type Account {
+    email: String!,
+    password: String!,
+    nickname: String,
+    isLive: Boolean
+}
+
+type Post {
+    id: Int!,
+    title: String!,
+    content: String!,
+    emotion: Emotion,
+    createdAt: String,
+    account: Account,
+    isLive: Boolean
+}
+
+type Emotion {
+    emotion: String
+}
