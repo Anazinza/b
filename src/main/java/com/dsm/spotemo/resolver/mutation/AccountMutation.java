@@ -4,7 +4,9 @@ import com.dsm.spotemo.dto.request.AccountRequestDto;
 import com.dsm.spotemo.dto.response.TokenAndAccountDto;
 import com.dsm.spotemo.entity.Account;
 import com.dsm.spotemo.entity.value.Nickname;
-import com.dsm.spotemo.global.TokenUtil;
+import com.dsm.spotemo.global.auth.TokenUtil;
+import com.dsm.spotemo.global.exception.BasicException;
+import com.dsm.spotemo.global.exception.ExceptionMessage;
 import com.dsm.spotemo.repository.AccountRepository;
 import graphql.kickstart.tools.GraphQLMutationResolver;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +32,7 @@ public class AccountMutation implements GraphQLMutationResolver {
         log.info("create-account"+"       "+nickname);
 
         if( accountRepository.existsById(dto.getEmail()) ) {
-
+            throw new BasicException(ExceptionMessage.EmailAlreadyExist);
         }
 
         accountRepository.save(
