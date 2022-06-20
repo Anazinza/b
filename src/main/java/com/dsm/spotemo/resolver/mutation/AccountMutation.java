@@ -1,7 +1,7 @@
 package com.dsm.spotemo.resolver.mutation;
 
-import com.dsm.spotemo.dto.request.AccountRequestDto;
-import com.dsm.spotemo.dto.response.TokenAndAccountDto;
+import com.dsm.spotemo.dto.request.AccountRequest;
+import com.dsm.spotemo.dto.response.TokenAndAccountResponse;
 import com.dsm.spotemo.entity.Account;
 import com.dsm.spotemo.entity.value.Nickname;
 import com.dsm.spotemo.global.auth.TokenUtil;
@@ -25,26 +25,26 @@ public class AccountMutation implements GraphQLMutationResolver {
     private final PasswordEncoder passwordEncoder;
     private final TokenUtil tokenUtil;
 
-    public TokenAndAccountDto createAccount(final AccountRequestDto dto) {
+    public TokenAndAccountResponse createAccount(final AccountRequest req) {
         final int idx = new Random().nextInt(Nickname.values().length);
         final String nickname = Nickname.values()[idx].getNickname();
 
         log.info("create-account"+"       "+nickname);
 
-        if( accountRepository.existsById(dto.getEmail()) ) {
+        if( accountRepository.existsById(req.getEmail()) ) {
             throw new BasicException(ExceptionMessage.EmailAlreadyExist);
         }
 
         accountRepository.save(
                 Account.builder()
-                        .email(dto.getEmail())
-                        .password(passwordEncoder.encode(dto.getPassword()))
+                        .email(req.getEmail())
+                        .password(passwordEncoder.encode(req.getPassword()))
                         .nickname(nickname).build()
         );
 
-        return TokenAndAccountDto.builder()
-                .email(dto.getEmail())
+        return TokenAndAccountResponse.builder()
+                .email(req.getEmail())
                 .nickname(nickname)
-                .token(tokenUtil.createToken(dto.getEmail(), nickname)).build();
+                .token(tokenUtil.createToken(req.getEmail(), nickname)).build();
     }
 }

@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Getter
 @Builder
-public class PostResponseDto {
+public class PostResponse {
     private int id;
     private String title;
     private String content;

@@ -1,10 +1,9 @@
 package com.dsm.spotemo.resolver;
 
-import com.dsm.spotemo.dto.response.PostResponseDto;
+import com.dsm.spotemo.dto.response.PostResponse;
 import com.dsm.spotemo.entity.Post;
 import com.dsm.spotemo.repository.PostRepository;
 import graphql.kickstart.tools.GraphQLQueryResolver;
-import io.leangen.graphql.annotations.GraphQLQuery;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -13,10 +12,10 @@ import org.springframework.stereotype.Component;
 public class Query implements GraphQLQueryResolver {
     private final PostRepository postRepository;
 
-    public PostResponseDto getPost(int id) {
+    public PostResponse getPost(int id) {
         Post post = postRepository.findById(id).orElseThrow();
 
-        return PostResponseDto
+        return PostResponse
                 .builder()
                 .id(post.getId())
                 .title(post.getTitle())

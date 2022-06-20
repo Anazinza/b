@@ -3,7 +3,7 @@ package com.dsm.spotemo.dto.request;
 import lombok.Getter;
 
 @Getter
-public class AccountRequestDto {
+public class AccountRequest {
     private String email;
     private String password;
 }

@@ -1,10 +1,11 @@
 package com.dsm.spotemo.dto.response;
 
-import com.dsm.spotemo.entity.Account;
 import lombok.Builder;
+import lombok.Getter;
 
+@Getter
 @Builder
-public class TokenAndAccountDto {
+public class TokenAndAccountResponse {
     String email;
     String nickname;
     String token;
