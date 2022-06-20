@@ -36,6 +36,10 @@ public class AccountDetails implements UserDetails {
         return account.getNickname();
     }
 
+    public Account getAccount() {
+        return account;
+    }
+
     @Override
     public boolean isAccountNonExpired() {
         return true;
