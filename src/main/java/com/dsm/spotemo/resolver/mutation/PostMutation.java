@@ -23,7 +23,14 @@ public class PostMutation implements GraphQLMutationResolver {
             throw new BasicException(ExceptionMessage.UnableWriteWithoutLogin, "로그인을 하지 않은 상태에서 글을 보존할 수 없습니다. 로그인이 필요합니다.");
         }
 
-        Account account = authentication.getAccountDetails().getAccount();
+
+
+        Account account = authentication.getPrincipal() instanceof String ?
+                Account.builder().build() :
+                authentication.getAccountDetails().getAccount();
+
+        System.out.println(account.getNickname());
+
 
         return true;
 
