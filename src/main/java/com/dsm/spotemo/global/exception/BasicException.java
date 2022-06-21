@@ -12,11 +12,14 @@ import java.util.Map;
 @Getter
 public class BasicException extends RuntimeException implements GraphQLError {
     private final ExceptionMessage em;
+    private final String detailsMessage;
 
-    public BasicException(ExceptionMessage exception) {
+    public BasicException(ExceptionMessage exception, String detailsMessage) {
         super (exception.getMessage());
         this.em = exception;
+        this.detailsMessage = detailsMessage;
     }
+
 
     @Override
     public Map<String, Object> getExtensions() {

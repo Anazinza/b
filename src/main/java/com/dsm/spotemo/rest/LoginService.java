@@ -20,7 +20,7 @@ public class LoginService {
     public TokenAndAccountResponse login(final String email, final String password) {
         Account account = repository.findById(email).orElseThrow();
         if(!passwordEncoder.matches(password, account.getPassword())) {
-            throw new BasicException(ExceptionMessage.PasswordMisMatch);
+            throw new BasicException(ExceptionMessage.PasswordMisMatch, "존재하는 이메일이지만 비밀번호가 올바르지 않습니다.");
         }
 
         return TokenAndAccountResponse.builder()

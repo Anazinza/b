@@ -32,7 +32,7 @@ public class AccountMutation implements GraphQLMutationResolver {
         log.info("create-account"+"       "+nickname);
 
         if( accountRepository.existsById(req.getEmail()) ) {
-            throw new BasicException(ExceptionMessage.EmailAlreadyExist);
+            throw new BasicException(ExceptionMessage.EmailAlreadyExist, "이미 존재하는 이메일입니다.");
         }
 
         accountRepository.save(
