@@ -22,6 +22,6 @@ public class PostQuery implements GraphQLQueryResolver {
                 .title(post.getTitle())
                 .content(post.getContent())
                 .emotion(post.getEmotion())
-                .date(post.getDate()).build();
+                .date(post.getDay()).build();
     }
 }

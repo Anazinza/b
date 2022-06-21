@@ -27,6 +27,6 @@ public class Post {
     private boolean isLive=true;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_email")
+    @JoinColumn(name = "account_email")
     private Account account;
 }
