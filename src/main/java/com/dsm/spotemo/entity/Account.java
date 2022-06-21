@@ -20,4 +20,7 @@ public class Account {
     private String nickname;
     private String password;
     private boolean isLive = true;
+    @OneToOne
+    @JoinColumn(name ="wirte_date_id", referencedColumnName = "id")
+    private WriteDate writeDate;
 }
