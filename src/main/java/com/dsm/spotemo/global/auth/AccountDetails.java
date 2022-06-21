@@ -49,7 +49,7 @@ public class AccountDetails implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return account.getIsLive() != 0;
+        return account.isLive();
     }
 
     @Override

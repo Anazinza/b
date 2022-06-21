@@ -22,9 +22,9 @@ public class PostMutation implements GraphQLMutationResolver {
     private final PostRepository repository;
     private final AuthenticationFacade authentication;
 
-    public boolean createPost(final PostCreateRequest req, final int isLive) {
+    public boolean createPost(final PostCreateRequest req, final boolean isLive) {
 
-        if(isLive==1 && authentication.getPrincipal() instanceof String) {
+        if(isLive && authentication.getPrincipal() instanceof String) {
             throw new BasicException(ExceptionMessage.UnableWriteWithoutLogin, "로그인을 하지 않은 상태에서 글을 보존할 수 없습니다. 로그인이 필요합니다.");
         }
 
@@ -36,13 +36,13 @@ public class PostMutation implements GraphQLMutationResolver {
                         .title(req.getTitle())
                         .content(req.getContent())
                         .emotion(new Emotion(req.getEmotion()))
-                        .date(new Date())
+                        .day(new Date())
                         .isLive(isLive)
                         .account(account).build();
 
         repository.save(post);
 
-        return post.getIsLive() != 0; // false means it's post is deleted
+        return post.isLive(); // false means it's post is deleted
     }
 
     public void postDelete() {

@@ -23,8 +23,8 @@ public class Post {
     private String content;
     @Embedded
     private Emotion emotion;
-    private Date date;
-    private int isLive=1;
+    private Date day;
+    private boolean isLive=true;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_email")

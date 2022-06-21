@@ -7,8 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @AllArgsConstructor
 @Builder
@@ -20,5 +19,5 @@ public class Account {
     private String email;
     private String nickname;
     private String password;
-    private int isLive = 1;
+    private boolean isLive = true;
 }
