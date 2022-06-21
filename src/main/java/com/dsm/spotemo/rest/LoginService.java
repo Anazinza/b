@@ -5,6 +5,7 @@ import com.dsm.spotemo.entity.Account;
 import com.dsm.spotemo.global.auth.TokenUtil;
 import com.dsm.spotemo.global.exception.BasicException;
 import com.dsm.spotemo.global.exception.ExceptionMessage;
+import com.dsm.spotemo.global.exception.exceptions.AccountNotFoundException;
 import com.dsm.spotemo.repository.AccountRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,7 +19,7 @@ public class LoginService {
     private final TokenUtil tokenUtil;
 
     public TokenAndAccountResponse login(final String email, final String password) {
-        Account account = repository.findById(email).orElseThrow();
+        Account account = repository.findById(email).orElseThrow(AccountNotFoundException::new);
         if(!passwordEncoder.matches(password, account.getPassword())) {
             throw new BasicException(ExceptionMessage.PasswordMisMatch, "존재하는 이메일이지만 비밀번호가 올바르지 않습니다.");
         }
