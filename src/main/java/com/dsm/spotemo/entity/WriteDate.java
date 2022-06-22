@@ -1,13 +1,12 @@
 package com.dsm.spotemo.entity;
 
 import com.dsm.spotemo.entity.value.DayPostInfo;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 @AllArgsConstructor
 @Builder
@@ -24,8 +23,8 @@ public class WriteDate {
     @OneToOne
     private Account account;
 
-    private int[] years;
-    private int[] months;
-    private Date[] dates;
-    private DayPostInfo[] all;
+    private Set<Integer> years;
+    private Set<Integer> months;
+    private Set<Date> dates;
+    private List<DayPostInfo> all;
 }
