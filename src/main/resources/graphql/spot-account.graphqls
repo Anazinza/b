@@ -5,7 +5,7 @@ schema {
 
 type Query {
     getPost(id: Int!): PostResponse
-    getWriteDay : Boolean
+    getWriteDay : WriteDate
 }
 
 type Mutation {

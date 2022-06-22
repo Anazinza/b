@@ -16,7 +16,8 @@ public class DayQuery implements GraphQLQueryResolver {
 
 
     @PreAuthorize("authenticated()")
-    public boolean getWriteDay() {
-        return true;
+    public WriteDate getWriteDay() {
+        // token 없을시 접근 못하게...
+        return authentication.getAccountDetails().getAccount().getWriteDate();
     }
 }

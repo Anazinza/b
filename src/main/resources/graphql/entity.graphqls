@@ -18,3 +18,17 @@ type Post {
 type Emotion {
     emotion: String
 }
+
+type WriteDate {
+    id: Int,
+    years: [Int],
+    months: [Int],
+    dates: [String],
+    all: [DayPostInfo]
+}
+
+type DayPostInfo {
+    day: String,
+    postId: Int,
+    title: String
+}
