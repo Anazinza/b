@@ -24,11 +24,12 @@ type WriteDate {
     years: [Int],
     months: [Int],
     dates: [String],
-    all: [DayPostInfo]
+    dayPostInfos: [DayPostInfo]
 }
 
 type DayPostInfo {
     day: String,
     postId: Int,
-    title: String
+    postTitle: String,
+    postEmotion: Emotion
 }

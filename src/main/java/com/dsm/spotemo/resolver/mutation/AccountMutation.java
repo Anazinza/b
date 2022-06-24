@@ -3,16 +3,19 @@ package com.dsm.spotemo.resolver.mutation;
 import com.dsm.spotemo.dto.request.AccountRequest;
 import com.dsm.spotemo.dto.response.TokenAndAccountResponse;
 import com.dsm.spotemo.entity.Account;
+import com.dsm.spotemo.entity.WriteDate;
 import com.dsm.spotemo.entity.value.Nickname;
 import com.dsm.spotemo.global.auth.TokenUtil;
 import com.dsm.spotemo.global.exception.BasicException;
 import com.dsm.spotemo.global.exception.ExceptionMessage;
 import com.dsm.spotemo.repository.AccountRepository;
+import com.dsm.spotemo.repository.WriteDateRepository;
 import graphql.kickstart.tools.GraphQLMutationResolver;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Random;
 
@@ -23,8 +26,10 @@ import java.util.Random;
 public class AccountMutation implements GraphQLMutationResolver {
     private final AccountRepository accountRepository;
     private final PasswordEncoder passwordEncoder;
+    private final WriteDateRepository dateRepository;
     private final TokenUtil tokenUtil;
 
+    @Transactional
     public TokenAndAccountResponse createAccount(final AccountRequest req) {
         final int idx = new Random().nextInt(Nickname.values().length);
         final String nickname = Nickname.values()[idx].getNickname();
@@ -35,11 +40,18 @@ public class AccountMutation implements GraphQLMutationResolver {
             throw new BasicException(ExceptionMessage.EmailAlreadyExist, "이미 존재하는 이메일입니다.");
         }
 
+        WriteDate date = dateRepository.save(
+                WriteDate.builder()
+                .accountEmail(req.getEmail()).build()
+        );
+
         accountRepository.save(
                 Account.builder()
                         .email(req.getEmail())
                         .password(passwordEncoder.encode(req.getPassword()))
-                        .nickname(nickname).build()
+                        .nickname(nickname)
+                        .writeDate(date)
+                        .build()
         );
 
         return TokenAndAccountResponse.builder()
