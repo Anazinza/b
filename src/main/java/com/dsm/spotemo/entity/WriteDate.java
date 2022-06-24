@@ -2,11 +2,15 @@ package com.dsm.spotemo.entity;
 
 import com.dsm.spotemo.entity.value.DayPostInfo;
 import lombok.*;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.TypeDefs;
+import org.hibernate.type.ListType;
+import org.hibernate.type.SetType;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.time.LocalDate;
+import java.util.*;
 
 @AllArgsConstructor
 @Builder
@@ -14,17 +18,28 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 @Table(name = "write_date")
+@TypeDefs(
+        {@TypeDef(name = "list", typeClass = ArrayList.class),
+        @TypeDef(name = "set", typeClass = HashSet.class)}
+)
 public class WriteDate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @JoinColumn(name ="account_email", referencedColumnName = "email")
-    @OneToOne
-    private Account account;
+//    @JoinColumn(name ="account_email", referencedColumnName = "email")
+////    @OneToOne(mappedBy = )
+//    @OneToOne
+//    private Account account; // 그냥 이메일만 저장할까..?
+    private String accountEmail;
 
-    private Set<Integer> years;
-    private Set<Integer> months;
-    private Set<Date> dates;
-    private List<DayPostInfo> all;
+    @Type(type = "list")
+//    @Column(columnDefinition = "Int[]")
+    private List<Integer> years = new ArrayList<>();
+    @Type(type = "list")
+    private List<Integer> months = new ArrayList<>();
+    @Type(type = "list")
+    private List<Date> dates = new ArrayList<>();
+    @Type(type = "list")
+    private List<DayPostInfo> dayPostInfos = new ArrayList<>();
 }
