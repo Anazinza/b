@@ -3,14 +3,8 @@ package com.dsm.spotemo.entity.value;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.hibernate.annotations.Type;
-
-import javax.persistence.Embeddable;
-import javax.persistence.Embedded;
 import java.util.Date;
 
-@Embeddable
 @NoArgsConstructor
 @Getter
 @AllArgsConstructor

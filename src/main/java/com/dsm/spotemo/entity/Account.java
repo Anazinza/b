@@ -1,26 +1,25 @@
 package com.dsm.spotemo.entity;
 
 
+import com.dsm.spotemo.entity.value.WriteDate;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-
-import javax.persistence.*;
 
 @AllArgsConstructor
 @Builder
 @Getter
 @NoArgsConstructor
-@Entity
+@Document
 public class Account {
     @Id
     private String email;
     private String nickname;
     private String password;
     private boolean isLive = true;
-    @OneToOne
-    @JoinColumn(name ="wirte_date_id", referencedColumnName = "id")
     private WriteDate writeDate;
 }
