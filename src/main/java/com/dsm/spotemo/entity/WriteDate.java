@@ -18,10 +18,10 @@ import java.util.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "write_date")
-@TypeDefs(
-        {@TypeDef(name = "list", typeClass = ArrayList.class),
-        @TypeDef(name = "set", typeClass = HashSet.class)}
-)
+//@TypeDefs(
+//        {@TypeDef(name = "list", typeClass = ArrayList.class),
+//        @TypeDef(name = "set", typeClass = HashSet.class)}
+//)
 public class WriteDate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,13 +33,19 @@ public class WriteDate {
 //    private Account account; // 그냥 이메일만 저장할까..?
     private String accountEmail;
 
-    @Type(type = "list")
+//    @Type(type = "list")
 //    @Column(columnDefinition = "Int[]")
-    private List<Integer> years = new ArrayList<>();
-    @Type(type = "list")
+//    @Column(name = "years", columnDefinition = "int[]")
+
+    @ElementCollection
+    private List<Integer> years;
+//    @Type(type = "list")
+    @ElementCollection
     private List<Integer> months = new ArrayList<>();
-    @Type(type = "list")
+//    @Type(type = "list")
+    @ElementCollection
     private List<Date> dates = new ArrayList<>();
-    @Type(type = "list")
+//    @Type(type = "list")
+    @ElementCollection
     private List<DayPostInfo> dayPostInfos = new ArrayList<>();
 }
