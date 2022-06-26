@@ -38,6 +38,8 @@ public class PostMutation implements GraphQLMutationResolver {
                         .title(req.getTitle())
                         .content(req.getContent())
                         .emotion(new Emotion(req.getEmotion()))
+                        .year(LocalDate.now().getYear())
+                        .month(LocalDate.now().getMonthValue())
                         .day(LocalDate.now())
                         .isLive(isLive)
                         .account(account).build();
@@ -45,8 +47,8 @@ public class PostMutation implements GraphQLMutationResolver {
         Post post = postRepository.save(p);
 
         account.getWriteDate().addDay(
-                post.getDay().getYear(),
-                post.getDay().getMonthValue(),
+                post.getYear(),
+                post.getMonth(),
                 post.getDay());
 
         account.getWriteDate().saveDayPostInfo(
