@@ -4,7 +4,7 @@ import com.dsm.spotemo.entity.value.Emotion;
 import lombok.Builder;
 import lombok.Getter;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Getter
 @Builder
@@ -13,5 +13,5 @@ public class PostResponse {
     private String title;
     private String content;
     private Emotion emotion;
-    private Date date;
+    private LocalDate date;
 }

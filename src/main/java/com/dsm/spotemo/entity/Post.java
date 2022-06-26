@@ -7,7 +7,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @AllArgsConstructor
 @Builder
@@ -21,7 +21,7 @@ public class Post {
     private String title;
     private String content;
     private Emotion emotion;
-    private Date day;
+    private LocalDate day;
     private boolean isLive=true;
 
     @DBRef(lazy = true)

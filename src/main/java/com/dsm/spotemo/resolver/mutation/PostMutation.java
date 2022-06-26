@@ -3,6 +3,7 @@ package com.dsm.spotemo.resolver.mutation;
 import com.dsm.spotemo.dto.request.PostCreateRequest;
 import com.dsm.spotemo.entity.Account;
 import com.dsm.spotemo.entity.Post;
+import com.dsm.spotemo.entity.value.DayPostInfo;
 import com.dsm.spotemo.entity.value.Emotion;
 import com.dsm.spotemo.global.auth.AuthenticationFacade;
 import com.dsm.spotemo.global.exception.BasicException;
@@ -13,7 +14,7 @@ import graphql.kickstart.tools.GraphQLMutationResolver;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 
 @RequiredArgsConstructor
@@ -33,17 +34,28 @@ public class PostMutation implements GraphQLMutationResolver {
                 authentication.getAnonymousAccount() :
                 authentication.getAccountDetails().getAccount();
 
-        Post post = Post.builder()
+        Post p = Post.builder()
                         .title(req.getTitle())
                         .content(req.getContent())
                         .emotion(new Emotion(req.getEmotion()))
-                        .day(new Date())
+                        .day(LocalDate.now())
                         .isLive(isLive)
                         .account(account).build();
 
-        postRepository.save(post);
+        Post post = postRepository.save(p);
 
-        account.getWriteDate().addDay(post.getDay().getYear(), post.getDay().getMonth(), post.getDay());
+        account.getWriteDate().addDay(
+                post.getDay().getYear(),
+                post.getDay().getMonthValue(),
+                post.getDay());
+
+        account.getWriteDate().saveDayPostInfo(
+                DayPostInfo.builder()
+                .day(post.getDay())
+                .postId(post.getId())
+                .postTitle(p.getTitle())
+                .postEmotion(p.getEmotion()).build()
+        );
 
         accountRepository.save(account);
 
