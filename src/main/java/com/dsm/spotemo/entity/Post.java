@@ -21,7 +21,11 @@ public class Post {
     private String title;
     private String content;
     private Emotion emotion;
+
+    private int year; // date one value ?
+    private int month;
     private LocalDate day;
+
     private boolean isLive=true;
 
     @DBRef(lazy = true)

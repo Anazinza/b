@@ -10,7 +10,9 @@ type Post {
     title: String!,
     content: String!,
     emotion: Emotion,
-    date: String,
+    year: Int,
+    month: Int,
+    day: String,
     account: Account,
     isLive: Boolean
 }
