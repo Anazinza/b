@@ -9,7 +9,7 @@ import java.util.Date;
 @Getter
 @Builder
 public class PostResponse {
-    private int id;
+    private String id;
     private String title;
     private String content;
     private Emotion emotion;

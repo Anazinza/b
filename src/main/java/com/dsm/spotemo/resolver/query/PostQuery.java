@@ -18,7 +18,7 @@ public class PostQuery implements GraphQLQueryResolver {
 
         return PostResponse
                 .builder()
-                .id(post.getId())
+                .id(post.getId().toString())
                 .title(post.getTitle())
                 .content(post.getContent())
                 .emotion(post.getEmotion())
