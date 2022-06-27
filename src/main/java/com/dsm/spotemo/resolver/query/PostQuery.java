@@ -2,6 +2,8 @@ package com.dsm.spotemo.resolver.query;
 
 import com.dsm.spotemo.dto.response.PostResponse;
 import com.dsm.spotemo.entity.Post;
+import com.dsm.spotemo.global.exception.BasicException;
+import com.dsm.spotemo.global.exception.ExceptionMessage;
 import com.dsm.spotemo.global.exception.exceptions.PostNotFoundException;
 import com.dsm.spotemo.repository.PostRepository;
 import graphql.kickstart.tools.GraphQLQueryResolver;
@@ -13,8 +15,12 @@ import org.springframework.stereotype.Component;
 public class PostQuery implements GraphQLQueryResolver {
     private final PostRepository postRepository;
 
-    public PostResponse getPost(int id) {
+    public PostResponse getPost(String id) {
         Post post = postRepository.findById(id).orElseThrow(PostNotFoundException::new);
+
+        if(!post.isLive()) {
+            throw new BasicException(ExceptionMessage.PostNotFoundException, "삭제된 게시글입니다.");
+        }
 
         return PostResponse
                 .builder()

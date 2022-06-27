@@ -41,7 +41,7 @@ public class PostMutation implements GraphQLMutationResolver {
                         .year(LocalDate.now().getYear())
                         .month(LocalDate.now().getMonthValue())
                         .day(LocalDate.now())
-                        .isLive(isLive)
+                        .live(isLive)
                         .account(account).build();
 
         Post post = postRepository.save(p);

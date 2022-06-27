@@ -4,7 +4,7 @@ schema {
 }
 
 type Query {
-    getPost(id: Int!): PostResponse
+    getPost(id: String!): PostResponse
     getWriteDay : WriteDate
     getDayAndPostInfo(year:Int!, month:Int!): [PostResponse]
 }
