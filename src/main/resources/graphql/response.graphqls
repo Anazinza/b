@@ -5,9 +5,9 @@ type TokenAndAccountResponse {
 }
 
 type PostResponse {
-    id: Int!,
+    id: String!,
     title: String!,
     content: String!,
     emotion: Emotion,
-    date: String,
+    date: String
 }

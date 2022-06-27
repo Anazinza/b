@@ -6,7 +6,7 @@ schema {
 type Query {
     getPost(id: Int!): PostResponse
     getWriteDay : WriteDate
-    getDayAndPostInfo(year:Int!, month:Int!): [Post]
+    getDayAndPostInfo(year:Int!, month:Int!): [PostResponse]
 }
 
 type Mutation {
