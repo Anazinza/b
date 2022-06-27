@@ -26,7 +26,7 @@ public class Post {
     private int month;
     private LocalDate day;
 
-    private boolean isLive=true;
+    private boolean live=true;
 
     @DBRef(lazy = true)
     private Account account;

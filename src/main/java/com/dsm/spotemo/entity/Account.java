@@ -20,6 +20,6 @@ public class Account {
     private String email;
     private String nickname;
     private String password;
-    private boolean isLive = true;
+    private boolean live = true;
     private WriteDate writeDate;
 }
