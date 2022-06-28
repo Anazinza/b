@@ -11,3 +11,13 @@ type PostResponse {
     emotion: Emotion,
     date: String
 }
+
+type AccountResponse {
+    email: String,
+    nickname: String,
+    emotions: [String]
+}
+
+type Emotions {
+    emotions: [String]
+}
