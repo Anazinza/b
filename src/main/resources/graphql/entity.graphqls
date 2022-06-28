@@ -22,7 +22,6 @@ type Emotion {
 }
 
 type WriteDate {
-    id: Int,
     years: [Int],
     months: [Int],
     dates: [String],

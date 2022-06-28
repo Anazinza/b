@@ -59,6 +59,8 @@ public class PostMutation implements GraphQLMutationResolver {
                 .postEmotion(p.getEmotion()).build()
         );
 
+        account.getEmotions().addEmotion(p.getEmotion().getEmotion());
+
         accountRepository.save(account);
 
         return post.isLive(); // false means it's post is deleted
