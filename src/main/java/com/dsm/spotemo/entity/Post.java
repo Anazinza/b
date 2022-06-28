@@ -30,4 +30,8 @@ public class Post {
 
     @DBRef(lazy = true)
     private Account account;
+
+    public void postDelete() {
+        this.live = false;
+    }
 }
