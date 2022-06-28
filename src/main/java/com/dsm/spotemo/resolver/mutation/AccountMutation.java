@@ -3,6 +3,7 @@ package com.dsm.spotemo.resolver.mutation;
 import com.dsm.spotemo.dto.request.AccountRequest;
 import com.dsm.spotemo.dto.response.TokenAndAccountResponse;
 import com.dsm.spotemo.entity.Account;
+import com.dsm.spotemo.entity.value.Emotions;
 import com.dsm.spotemo.entity.value.WriteDate;
 import com.dsm.spotemo.entity.value.Nickname;
 import com.dsm.spotemo.global.auth.TokenUtil;
@@ -43,7 +44,8 @@ public class AccountMutation implements GraphQLMutationResolver {
                         .email(req.getEmail())
                         .password(passwordEncoder.encode(req.getPassword()))
                         .nickname(nickname)
-                        .writeDate(WriteDate.builder().build())
+                        .writeDate(new WriteDate())
+                        .emotions(new Emotions())
                         .build()
         );
 

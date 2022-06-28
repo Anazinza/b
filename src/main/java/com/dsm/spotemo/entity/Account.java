@@ -1,6 +1,7 @@
 package com.dsm.spotemo.entity;
 
 
+import com.dsm.spotemo.entity.value.Emotions;
 import com.dsm.spotemo.entity.value.WriteDate;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,4 +23,5 @@ public class Account {
     private String password;
     private boolean live = true;
     private WriteDate writeDate;
+    private Emotions emotions;
 }

@@ -6,14 +6,11 @@ import org.springframework.data.annotation.Id;
 import java.time.LocalDate;
 import java.util.*;
 
-@AllArgsConstructor
-@Builder
+//@AllArgsConstructor
+//@Builder
 @Getter
 @NoArgsConstructor
 public class WriteDate {
-    @Id
-    private int id;
-
     private Set<Integer> years = new HashSet<>();
     private Set<Integer> months = new HashSet<>();
     private Set<LocalDate> dates = new HashSet<>();
