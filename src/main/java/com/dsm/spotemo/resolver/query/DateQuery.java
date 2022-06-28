@@ -1,6 +1,8 @@
 package com.dsm.spotemo.resolver.query;
 
+import com.dsm.spotemo.dto.response.AccountResponse;
 import com.dsm.spotemo.dto.response.PostResponse;
+import com.dsm.spotemo.entity.Account;
 import com.dsm.spotemo.entity.value.WriteDate;
 import com.dsm.spotemo.global.auth.AuthenticationFacade;
 import com.dsm.spotemo.repository.PostRepository;
@@ -20,8 +22,17 @@ public class DateQuery implements GraphQLQueryResolver {
 
     @PreAuthorize("authenticated()")
     public WriteDate getWriteDay() {
-        // token 없을시 접근 못하게...
         return authentication.getAccountDetails().getAccount().getWriteDate();
+    }
+
+    // date 제외한 account 정보?
+    public AccountResponse getAccount() {
+        Account account = authentication.getAccountDetails().getAccount();
+
+        return AccountResponse.builder()
+                .email(account.getEmail())
+                .nickname(account.getNickname())
+                .emotions(account.getEmotions().getEmotions()).build();
     }
 
     public List<PostResponse> getDayAndPostInfo(int year, int month) {

@@ -7,6 +7,7 @@ type Query {
     getPost(id: String!): PostResponse
     getWriteDay : WriteDate
     getDayAndPostInfo(year:Int!, month:Int!): [PostResponse]
+    getAccount : AccountResponse
 }
 
 type Mutation {
