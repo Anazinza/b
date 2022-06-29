@@ -20,16 +20,10 @@ repositories {
 }
 
 dependencies {
-//	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
-	// https://mavenlibs.com/maven/dependency/org.springframework.security/spring-security-core
-//	implementation 'org.springframework.security:spring-security-core:5.5.8'
 
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
-//	runtimeOnly 'mysql:mysql-connector-java'
-	// https://mvnrepository.com/artifact/org.postgresql/postgresql
-//	implementation 'org.postgresql:postgresql:42.4.0'
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 
 	annotationProcessor 'org.projectlombok:lombok'
@@ -43,19 +37,18 @@ dependencies {
 
 	testImplementation 'com.graphql-java-kickstart:graphql-spring-boot-starter-test:12.0.0'
 
-//	implementation group: 'com.graphql-java-kickstart', name: 'graphql-java-tools', version: '11.0.0'
 	implementation 'io.leangen.graphql:spqr:0.10.1'
-//	implementation 'org.springframework.boot:spring-boot-starter-graphql'
-//	implementation 'com.graphql-java:graphql-java:11.0'
-//	implementation 'com.graphql-java-kickstart:graphql-spring-boot-starter:11.0.0'
-//	implementation 'com.graphql-java-kickstart:playground-spring-boot-starter:11.0.0'
 
 	// jwt
 	implementation 'io.jsonwebtoken:jjwt-api:0.10.7'
 
-//오류 해결을 위해 추가로 넣은 의존성
+	//오류 해결을 위해 추가로 넣은 의존성
 	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.10.7'
 	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.10.7'
+
+	// https://mvnrepository.com/artifact/io.leangen.graphql/graphql-spqr-spring-boot-starter
+	implementation 'io.leangen.graphql:graphql-spqr-spring-boot-starter:0.0.6'
+
 }
 
 tasks.named('test') {
