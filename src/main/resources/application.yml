@@ -2,17 +2,27 @@ server:
   port: 8085
 
 spring:
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ${DB_URL:}
-    username: ${DB_USERNAME:}
-    password: ${DB_PW:}
+  data:
+    mongodb:
+      uri: ${MONGODB_URI:mongodb://localhost:27017/spot}
   jpa:
     show-sql: true
-    hibernate:
-      ddl-auto: update
+#    hibernate:
+#      ddl-auto: create
 
   graphql:
-    path: /spotemo
     graphiql:
       enabled: true
+      path: /spotemo # 안돼
+  main:
+    allow-bean-definition-overriding: true
+
+auth:
+  secret: ${SECRET_KEY:}
+
+graphql:
+  spqr:
+    gui:
+      enabled: true
+  servlet:
+    exception-handlers-enabled: true
