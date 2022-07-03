@@ -18,7 +18,7 @@ public class PostQuery implements GraphQLQueryResolver {
     private final PostRepository postRepository;
 
     @PreAuthorize("isAuthenticated()")
-    public PostResponse getPost(String id) {
+    public PostResponse post(String id) {
         Post post = postRepository.findById(id).orElseThrow(PostNotFoundException::new);
 
         if(!post.isLive()) {

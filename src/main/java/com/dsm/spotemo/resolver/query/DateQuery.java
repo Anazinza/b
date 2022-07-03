@@ -22,13 +22,13 @@ public class DateQuery implements GraphQLQueryResolver {
     private final AuthenticationFacade authentication;
     private final PostRepository postRepository;
 
-    @PreAuthorize("authenticated()")
-    public WriteDate getWriteDay() {
+    @PreAuthorize("isAuthenticated()")
+    public WriteDate writeDay() {
         return authentication.getAccountDetails().getAccount().getWriteDate();
     }
 
     @PreAuthorize("isAuthenticated()")
-    public AccountResponse getAccount() {
+    public AccountResponse account() {
         Account account = authentication.getAccountDetails().getAccount();
 
         return AccountResponse.builder()
@@ -38,7 +38,7 @@ public class DateQuery implements GraphQLQueryResolver {
     }
 
     @PreAuthorize("isAuthenticated()")
-    public List<PostResponse> getDayAndPostInfo(int year, int month) {
+    public List<PostResponse> posts(int year, int month) {
         return postRepository.findAllByYearAndMonthAndAccountAndLiveIsTrue(year, month, authentication.getAccountDetails().getAccount())
                 .stream()
                 .map( post -> PostResponse.builder()
