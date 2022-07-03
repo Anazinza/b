@@ -8,6 +8,7 @@ import com.dsm.spotemo.global.auth.AuthenticationFacade;
 import com.dsm.spotemo.repository.PostRepository;
 import graphql.kickstart.tools.GraphQLQueryResolver;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
+@Log4j2
 public class DateQuery implements GraphQLQueryResolver {
     private final AuthenticationFacade authentication;
     private final PostRepository postRepository;
@@ -25,7 +27,7 @@ public class DateQuery implements GraphQLQueryResolver {
         return authentication.getAccountDetails().getAccount().getWriteDate();
     }
 
-    // date 제외한 account 정보?
+    @PreAuthorize("isAuthenticated()")
     public AccountResponse getAccount() {
         Account account = authentication.getAccountDetails().getAccount();
 
@@ -35,6 +37,7 @@ public class DateQuery implements GraphQLQueryResolver {
                 .emotions(account.getEmotions().getEmotions()).build();
     }
 
+    @PreAuthorize("isAuthenticated()")
     public List<PostResponse> getDayAndPostInfo(int year, int month) {
         return postRepository.findAllByYearAndMonthAndAccountAndLiveIsTrue(year, month, authentication.getAccountDetails().getAccount())
                 .stream()

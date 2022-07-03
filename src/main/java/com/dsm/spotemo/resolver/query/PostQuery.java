@@ -7,7 +7,9 @@ import com.dsm.spotemo.global.exception.ExceptionMessage;
 import com.dsm.spotemo.global.exception.exceptions.PostNotFoundException;
 import com.dsm.spotemo.repository.PostRepository;
 import graphql.kickstart.tools.GraphQLQueryResolver;
+import io.leangen.graphql.annotations.GraphQLQuery;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Component;
 public class PostQuery implements GraphQLQueryResolver {
     private final PostRepository postRepository;
 
+    @PreAuthorize("isAuthenticated()")
     public PostResponse getPost(String id) {
         Post post = postRepository.findById(id).orElseThrow(PostNotFoundException::new);
 

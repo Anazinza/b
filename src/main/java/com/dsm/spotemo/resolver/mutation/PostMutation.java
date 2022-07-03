@@ -12,6 +12,7 @@ import com.dsm.spotemo.repository.AccountRepository;
 import com.dsm.spotemo.repository.PostRepository;
 import graphql.kickstart.tools.GraphQLMutationResolver;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -66,6 +67,7 @@ public class PostMutation implements GraphQLMutationResolver {
         return post.isLive(); // false means it's post is deleted
     }
 
+    @PreAuthorize("isAuthenticated()")
     public void postDelete() {
 
     }
