@@ -8,8 +8,10 @@ import com.dsm.spotemo.entity.value.Emotion;
 import com.dsm.spotemo.global.auth.AuthenticationFacade;
 import com.dsm.spotemo.global.exception.BasicException;
 import com.dsm.spotemo.global.exception.ExceptionMessage;
+import com.dsm.spotemo.global.exception.exceptions.PostNotFoundException;
 import com.dsm.spotemo.repository.AccountRepository;
 import com.dsm.spotemo.repository.PostRepository;
+import com.dsm.spotemo.rest.PostService;
 import graphql.kickstart.tools.GraphQLMutationResolver;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -23,6 +25,7 @@ import java.time.LocalDate;
 public class PostMutation implements GraphQLMutationResolver {
     private final PostRepository postRepository;
     private final AccountRepository accountRepository;
+    private final PostService postService;
     private final AuthenticationFacade authentication;
 
     public boolean createPost(final PostCreateRequest req, final boolean isLive) {
@@ -68,7 +71,8 @@ public class PostMutation implements GraphQLMutationResolver {
     }
 
     @PreAuthorize("isAuthenticated()")
-    public void postDelete() {
-
+    public boolean deletePost(String id) {
+        postService.postDelete(id);
+        return true;
     }
 }

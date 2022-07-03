@@ -13,4 +13,5 @@ type Query {
 type Mutation {
     createAccount(req: AccountRequest!): TokenAndAccountResponse
     createPost(req: PostCreateRequest, isLive: Boolean!): Boolean
+    deletePost(id: String!) : Boolean
 }
