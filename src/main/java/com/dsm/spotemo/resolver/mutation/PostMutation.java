@@ -50,22 +50,24 @@ public class PostMutation implements GraphQLMutationResolver {
 
         Post post = postRepository.save(p);
 
-        account.getWriteDate().addDay(
-                post.getYear(),
-                post.getMonth(),
-                post.getDay());
+        if(isLive) {
+            account.getWriteDate().addDay(
+                    post.getYear(),
+                    post.getMonth(),
+                    post.getDay());
 
-        account.getWriteDate().saveDayPostInfo(
-                DayPostInfo.builder()
-                .day(post.getDay())
-                .postId(post.getId())
-                .postTitle(p.getTitle())
-                .postEmotion(p.getEmotion()).build()
-        );
+            account.getWriteDate().saveDayPostInfo(
+                    DayPostInfo.builder()
+                            .day(post.getDay())
+                            .postId(post.getId())
+                            .postTitle(p.getTitle())
+                            .postEmotion(p.getEmotion()).build()
+            );
 
-        account.getEmotions().addEmotion(p.getEmotion().getEmotion());
+            account.getEmotions().addEmotion(p.getEmotion().getEmotion());
 
-        accountRepository.save(account);
+            accountRepository.save(account);
+        }
 
         return post.isLive(); // false means it's post is deleted
     }
