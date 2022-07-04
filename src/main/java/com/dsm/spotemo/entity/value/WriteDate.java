@@ -26,4 +26,10 @@ public class WriteDate {
         dayPostInfos.add(info);
     }
 
+    public void deleteDay(DayDto day) {
+        years.remove(Integer.valueOf(day.year));
+        months.remove(Integer.valueOf(day.month));
+        dates.remove(day.date);
+        dayPostInfos.remove(day.info);
+    }
 }
