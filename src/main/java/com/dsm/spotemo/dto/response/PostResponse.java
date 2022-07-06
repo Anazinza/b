@@ -12,6 +12,7 @@ public class PostResponse {
     private String id;
     private String title;
     private String content;
-    private Emotion emotion;
+//    private Emotion emotion;
+    private String emotion;
     private LocalDate date;
 }

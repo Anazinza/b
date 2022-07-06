@@ -8,7 +8,7 @@ type PostResponse {
     id: String!,
     title: String!,
     content: String!,
-    emotion: Emotion,
+    emotion: String,
     date: String
 }
 

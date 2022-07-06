@@ -41,7 +41,7 @@ public class PostMutation implements GraphQLMutationResolver {
         Post p = Post.builder()
                         .title(req.getTitle())
                         .content(req.getContent())
-                        .emotion(new Emotion(req.getEmotion()))
+                        .emotion(req.getEmotion())
                         .year(LocalDate.now().getYear())
                         .month(LocalDate.now().getMonthValue())
                         .day(LocalDate.now())
@@ -64,7 +64,7 @@ public class PostMutation implements GraphQLMutationResolver {
                             .postEmotion(p.getEmotion()).build()
             );
 
-            account.getEmotions().addEmotion(p.getEmotion().getEmotion());
+            account.getEmotions().addEmotion(p.getEmotion());
 
             accountRepository.save(account);
         }

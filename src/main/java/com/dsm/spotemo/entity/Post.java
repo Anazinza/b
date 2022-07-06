@@ -20,7 +20,7 @@ public class Post {
 
     private String title;
     private String content;
-    private Emotion emotion;
+    private String emotion;
 
     private int year; // date one value ?
     private int month;

@@ -9,7 +9,7 @@ type Post {
     id: String!,
     title: String!,
     content: String!,
-    emotion: Emotion,
+    emotion: String,
     year: Int,
     month: Int,
     day: String,
@@ -32,5 +32,5 @@ type DayPostInfo {
     day: String,
     postId: String,
     postTitle: String,
-    postEmotion: Emotion
+    postEmotion: String
 }
