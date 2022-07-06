@@ -18,6 +18,9 @@ type AccountResponse {
     emotions: [String]
 }
 
-type Emotions {
-    emotions: [String]
+type WriteDateResponse {
+    years: [Int],
+    months: [Int],
+    dates: [String],
+    postInfos: [DayPostInfo]
 }

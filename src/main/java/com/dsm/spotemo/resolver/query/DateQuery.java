@@ -2,6 +2,7 @@ package com.dsm.spotemo.resolver.query;
 
 import com.dsm.spotemo.dto.response.AccountResponse;
 import com.dsm.spotemo.dto.response.PostResponse;
+import com.dsm.spotemo.dto.response.WriteDateResponse;
 import com.dsm.spotemo.entity.Account;
 import com.dsm.spotemo.entity.value.WriteDate;
 import com.dsm.spotemo.global.auth.AuthenticationFacade;
@@ -12,6 +13,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,8 +25,13 @@ public class DateQuery implements GraphQLQueryResolver {
     private final PostRepository postRepository;
 
     @PreAuthorize("isAuthenticated()")
-    public WriteDate writeDay() {
-        return authentication.getAccountDetails().getAccount().getWriteDate();
+    public WriteDateResponse writeDay() {
+        WriteDate writeDate = authentication.getAccountDetails().getAccount().getWriteDate();
+        return WriteDateResponse.builder()
+                .years(new HashSet<>(writeDate.getYears()))
+                .months(new HashSet<>(writeDate.getMonths()))
+                .dates(new HashSet<>(writeDate.getDates()))
+                .postInfos(writeDate.getDayPostInfos()).build();
     }
 
     @PreAuthorize("isAuthenticated()")

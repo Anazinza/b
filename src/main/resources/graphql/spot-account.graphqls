@@ -5,7 +5,7 @@ schema {
 
 type Query {
     post(id: String!): PostResponse
-    writeDay : WriteDate
+    writeDay : WriteDateResponse
     posts(year:Int!, month:Int!): [PostResponse]
     account : AccountResponse
 }
