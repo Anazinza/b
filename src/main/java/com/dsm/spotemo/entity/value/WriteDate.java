@@ -1,7 +1,7 @@
 package com.dsm.spotemo.entity.value;
 
+import com.dsm.spotemo.dto.request.DayDto;
 import lombok.*;
-import org.springframework.data.annotation.Id;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -11,9 +11,9 @@ import java.util.*;
 @Getter
 @NoArgsConstructor
 public class WriteDate {
-    private Set<Integer> years = new HashSet<>();
-    private Set<Integer> months = new HashSet<>();
-    private Set<LocalDate> dates = new HashSet<>();
+    private List<Integer> years = new ArrayList<>();
+    private List<Integer> months = new ArrayList<>();
+    private List<LocalDate> dates = new ArrayList<>();
     private List<DayPostInfo> dayPostInfos = new ArrayList<>();
 
     public void addDay(int year, int month, LocalDate date) {
